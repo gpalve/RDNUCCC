@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Landing Page</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+            body {
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+            /* html, body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            } */
+            video {
+            /* override other styles to make responsive */
+            width: 100%    !important;
+            height: auto   !important;
+            }
+      </style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            
+        <div class="row">
+            <div class="col-2">
+                <!-- side banner -->
+               <img src="./assets/img/sideBanner.gif" width="100%" alt="">
+            </div>
+            <div class="col-10">
+                <!-- livebanner -->
+                
+                <div class="video-list" style="height:99%;width:99%">
+                    <p>
+                       
+                    </p>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-12" height="100%"><center><h5 style="padding:0;margin:0;">Centralized Broadcasting, DRM/MMCT IT Cell</h5></center></div>
+
+            <div class="col-12" height="100%"><center>To broacast content contact drmbctitcell@gmail.com</center></div> -->
+
+            <div class="col-12">
+                <img src="./assets/img/banner.jpg" width="100%" height="auto" alt="I love">
+            </div>
+
+            <!-- <div class="col-12" height="100%" style="background-color:#000000;color:white;"><marquee>All the live news Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus asperiores amet quasi aspernatur eaque aliquam minus qui numquam vero iure fuga culpa, ex quibusdam reprehenderit maxime dolore corrupti dolorum quaerat? </marquee></div> -->
+           
+        </div>
+   
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+
+    let sockett = io("")
+  
+    sockett.on('videoUploaded',(data) => {
+        //console.log(data)
+        const vc_area = ` <p> <video width="100%" height="auto" autoplay muted loop controls preload="auto"><source src=" ${data}" type="video/mp4"></video>
+      </p>`
+      $('.video-list p').replaceWith(vc_area);
+    })
+
+    sockett.on('image',(data) => {
+        //console.log(data)
+        const vc_area = `<p><img src=" ${data}" width="100%" height="auto" style="padding-right:calc(var(--bs-gutter-x) * 0.0);padding-left: calc(var(--bs-gutter-x) * 0.0);"></p>`
+      $('.video-list p').replaceWith(vc_area);
+    })
+
+    sockett.on('chat message',(data) => {
+        //console.log(data)
+        
+        const vc_area = `<div style="color:green;margin:20px;"><center><h1><p>${data}</p></h1></center></div>`
+      $('.video-list p').replaceWith(vc_area);
+    })
+
+    sockett.on('liveBroadcast',(data) => {
+     alert(data)
+        const vc_area = `<p><video width="700px" height="500px" playsinline autoplay muted></video><button id="enable-audio">Enable audio</button></p>`
+        $('.video-list p').replaceWith(vc_area);
+      
+    })
+    
+
+    </script>
+    <script src="/socket.io/socket.io.js"></script> 
+     <script src="./watch.js"></script>
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+   
+</html>
+
